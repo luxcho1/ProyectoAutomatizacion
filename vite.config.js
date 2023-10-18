@@ -3,10 +3,6 @@ import laravel from 'laravel-vite-plugin';
 import path from 'path'; // Importa la biblioteca 'path'
 
 export default defineConfig({
-    base: 'http://191.112.8.231:8000/',
-    server: {
-      host: '192.168.1.94',
-    },
   plugins: [
     laravel({
       input: 'resources/js/app.js', // Ruta al archivo principal de JavaScript

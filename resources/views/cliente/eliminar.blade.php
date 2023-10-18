@@ -2,31 +2,25 @@
 @section('content')
 <head>
     <div class="container">
-        <h1 style="text-align: center">Mostrar clientes</h1>
+        <h1 style="text-align: center">Eliminar Clientes</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th>RUT</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Direccion</th>
-                    <th>Comuna</th>
-                    <th>Telefono</th>
-                    <th>Nombre Usuario</th>
-                    <th>Contraseña</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($cliente as $clientes)
                     <tr>
-                        <td>{{ $clientes->rut }}</td>
                         <td>{{ $clientes->nombre }}</td>
                         <td>{{ $clientes->apellido }}</td>
-                        <td>{{ $clientes->direccion }}</td>
-                        <td>{{ $clientes->comuna }}</td>
-                        <td>{{ $clientes->telefono }}</td>
-                        <td>{{ $clientes->nombre_usuario }}</td>
-                        <td>{{ $clientes->contraseña }}</td>
+
+                        <td><form action="{{ url('/cliente/'.$clientes->id) }}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+                        </form></td>
                     </tr>
                 @endforeach
             </tbody>

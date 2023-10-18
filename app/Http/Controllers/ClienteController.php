@@ -38,7 +38,7 @@ class ClienteController extends Controller
             'apellido'       => 'required|string|max:1000',
             'direccion'      => 'required|string|max:99999',
             'comuna'         => 'required|string|max:100',
-            'telefono'       => 'required|numeric|max:1000',
+            'telefono'       => 'required|numeric|max:999999999',
             'nombre_usuario' => 'required|string|max:1000',
             'contraseña'     => 'required|string|max:1000',
         ];
@@ -67,24 +67,65 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        return view('cliente.editar', compact('cliente'));
     }
+
+
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $campos=[
+            'rut'            => 'required|string|max:100',
+            'nombre'         => 'required|string|max:100',
+            'apellido'       => 'required|string|max:1000',
+            'direccion'      => 'required|string|max:99999',
+            'comuna'         => 'required|string|max:100',
+            'telefono'       => 'required|numeric|max:999999999',
+            'nombre_usuario' => 'required|string|max:1000',
+            'contraseña'     => 'required|string|max:1000',
+        ];
+
+        $mensaje=[
+            'required' => 'El :attribute es requerido',
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
+        $datosCliente = request()->except(['_token','_method']);
+
+        Cliente::where('id','=',$id)->update($datosCliente);
+        $cliente=Cliente::findOrFail($id);
+        return redirect('/')->with('mensaje','Cliente actualizado correctamente');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        $cliente=Cliente::findOrFail($id);
+        Cliente::destroy($id);
+        return redirect('/')->with('mensaje','Producto borrado correctamente');
+
+    }
+
+    public function mostrarVistaEliminar()
+    {
+        $datos['cliente']=Cliente::paginate(1000);
+        return view('cliente.eliminar',$datos);
+    }
+
+    public function mostrarVistaEditar()
+    {
+        $datos['cliente']=Cliente::paginate(1000);
+        return view('cliente.mostrarEditar',$datos); 
     }
 }

@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/cliente/eliminar', [ClienteController::class, 'mostrarVistaEliminar']);
+Route::get('/cliente/editar',   [ClienteController::class, 'mostrarVistaEditar']);
 Route::resource('cliente', ClienteController::class)->middleware('auth');
