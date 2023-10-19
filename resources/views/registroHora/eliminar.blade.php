@@ -2,20 +2,20 @@
 @section('content')
 <head>
     <div class="container">
-        <h1 style="text-align: center">Eliminar Clientes</h1>
+        <h1 style="text-align: center">Eliminar Registro de Horas</h1>
 
         <div class="row">
-            @foreach($cliente as $clientes)
+            @foreach($registroHora as $registro)
                 <div class="col-md-4">
                     <div class="card" style="margin-bottom: 10%">
                         <div class="card-body" style="">
+                            <h3 class="card-text">ID Reserva</h3>
+                            <h6>{{ $registro->id_reserva }}</h6>
                             <h3 class="card-text">RUT</h3>
-                            <h6>{{ $clientes->rut }}</h6>
-                            <h3 class="card-text">Nombre</h3>
-                            <h6>{{ $clientes->nombre }} {{ $clientes->apellido }}</h6>
-
-                            <h6></h6>
-                            <form action="{{ url('/cliente/'.$clientes->id) }}" class="d-inline" method="post">
+                            <h6>{{ $registro->rut }}</h6>
+                            <h3 class="card-text">Fecha</h3>
+                            <h6>{{ $registro->fecha }}</h6>
+                            <form action="{{ url('/registro/'.$registro->id) }}" class="d-inline" method="post">
                                 <div class="row">
                                     @csrf
                                     {{ method_field('DELETE') }}

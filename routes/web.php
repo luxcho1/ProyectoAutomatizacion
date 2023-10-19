@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\RegistroHoraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/cliente/eliminar', [ClienteController::class, 'mostrarVistaEliminar']);
 Route::get('/cliente/editar',   [ClienteController::class, 'mostrarVistaEditar']);
 Route::resource('cliente', ClienteController::class)->middleware('auth');
+
+Route::get('/registro/eliminar', [RegistroHoraController::class, 'mostrarVistaEliminar']);
+Route::get('/registro/editar',   [RegistroHoraController::class, 'mostrarVistaEditar']);
+Route::resource('registro', RegistroHoraController::class)->middleware('auth');
+
+

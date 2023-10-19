@@ -5,9 +5,7 @@
 <body>
   <h1 style="text-align: center">Registro Clientes</h1>
 
-  <div class="container">
-    <h1>Formulario de creacion de producto</h1>
-    
+  <div class="container">    
     <form action="{{ url('/cliente') }}" method="post" enctype="multipart/form-data">
     @csrf
     @include('cliente.formulario',['modo'=>'Ingresar'])
